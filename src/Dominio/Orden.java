@@ -19,17 +19,16 @@ public class Orden {
     
     final int MAX_PRODUCTOS = 10; 
 
-    public Orden() {
+    private Orden() {
         contadorOrden++;
         idOrden = contadorOrden;
     }
     
     
 
-    public Orden( ArrayList <Producto> lista, int contadorOrden) {
+    public Orden( ArrayList <Producto> lista) {
         this();
         this.lista = lista;
-        this.contadorOrden = contadorOrden;
     }
     
     public void agregarProducto(Producto producto){        
@@ -37,10 +36,16 @@ public class Orden {
             lista.add(producto);
             System.out.println("Producto agregado correctamente");
         }else{
-            System.out.println("No se pudo agregar el producto");
+            System.out.println("No se pudo agregar el producto, demasiados items");
         }
         
     }
+
+    public int getIdOrden() {
+        return idOrden;
+    }
+    
+    
     
     public double calcularTotal(){
         double total = 0;
