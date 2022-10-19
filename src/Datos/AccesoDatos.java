@@ -14,26 +14,32 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
+
+
 /**
  *
  * @author Alumno Mañana
  */
-public class AccesoDatos {
+public class AccesoDatos implements Interfaz{
     
-    public static void crearArchivo(String nombre){
+  
+     
+     
+
+    @Override
+    public void crearArchivo(String nombre) {
         File archivo = new File(nombre);
         try{
             PrintWriter salida = new PrintWriter(archivo);
             salida.close();
         }catch (FileNotFoundException ex){
             ex.printStackTrace(System.out);
+        }
     }
-        
 
-    }
-    
-    public static void escribirArchivo(String nombre, String contenido){
-        PrintWriter salida = null;
+    @Override
+    public void escribirArchivo(String nombre, String contenido) {
+       PrintWriter salida = null;
         File archivo = new File(nombre);
          try{
             salida = new PrintWriter(archivo);
@@ -46,8 +52,9 @@ public class AccesoDatos {
              salida.close(); //siempre se ejecuta
          }
     }
-    
-    public static void agregarArchivo(String nombre, String contenido){
+
+    @Override
+    public void agregarArchivo(String nombre, String contenido) {
         PrintWriter salida = null;
         File archivo = new File(nombre);
         try {
@@ -59,9 +66,10 @@ public class AccesoDatos {
              salida.close(); //siempre se ejecuta
         }
     }
-    
-     public static void leerArchivo(String nombre){
-         File archivo = new File(nombre);
+
+    @Override
+    public void leerArchivo(String nombre){
+          File archivo = new File(nombre);
          BufferedReader entrada = null;
         try {
             entrada = new BufferedReader (new FileReader(archivo));
@@ -76,10 +84,10 @@ public class AccesoDatos {
         }catch(IOException ex){
             ex.printStackTrace(System.out);
         }
-        
-     }
-     
-     public static void leerArchivoPorPalabra(String nombre){
+    }
+
+    @Override
+    public void leerArchivoPorPalabra(String nombre){
          File archivo = new File(nombre);
          Scanner entrada = null;
          
@@ -96,4 +104,7 @@ public class AccesoDatos {
            
         }
      }
+
+    
+   
 }
