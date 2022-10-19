@@ -43,7 +43,7 @@ public class VentasTest {
             System.out.println("\t Escoja una de las siguientes opciones");
             System.out.println("\t1) Hacer una Orden");
             System.out.println("\t2) Mostrar Orden");
-            System.out.println("\t3) Mostrar total");
+            System.out.println("\t3) Mostrar Total");
             System.out.println("\t4) Terminar Orden");
             System.out.println("\t0) Salir");
             opcion = in.nextInt();
@@ -55,7 +55,7 @@ public class VentasTest {
                     break;
                 case 2:
                     in.nextLine();
-                   Orden ord;
+                    Orden ord;
                     mostrarOrdenes(historialVenta);
                     System.out.println("Seleccione la orden a mostrar: ");
                     int a = in.nextInt()-1;
@@ -63,7 +63,8 @@ public class VentasTest {
                     in.nextLine();
                     ord = historialVenta.get(a);
                     ord.mostrarOrden();
-                    
+                    System.out.println("Pulse intro para continuar.");
+                    in.nextLine();
                     
                     break;
                 case 3:
@@ -80,7 +81,7 @@ public class VentasTest {
                     break;
                     
                 default:
-                    System.out.println("Inserte un número entre el 0 y el 3.");
+                    System.out.println("Inserte un número entre el 0 y el 4.");
                     break;
             }
             
@@ -96,7 +97,6 @@ public class VentasTest {
         Producto proTemp;
         System.out.println("Introduzca el nombre del producto:");
         String nom = in.nextLine();
-        in.nextLine();
         System.out.println("Introduzca el precio:");
         double pre = in.nextDouble();
         in.nextLine();
@@ -112,18 +112,21 @@ public class VentasTest {
     
     
     public static void otroPro(){
+//        Creo y añado la orden al arratList
         ArrayList <Producto> lista = new ArrayList<>();
-         Orden entrada;
+        Orden entrada;
         entrada = new Orden(lista);
         historialVenta.add(entrada);
         
         System.out.println("¿Desea introducir un producto?");
         System.out.println("y(sí)/n(no)");
         char a = in.next().toLowerCase().charAt(0);
+        in.nextLine();
         
         while (a != 'y' && a!='n'){
             System.out.println("introduzca un valor válido (y ó n)");
             a = in.next().toLowerCase().charAt(0);
+            in.nextLine();
         }
         
         while(a == 'y'){
@@ -131,6 +134,7 @@ public class VentasTest {
             System.out.println("¿Desea introducir otro producto?");
             System.out.println("y(sí)/n(no)");
             a = in.next().charAt(0);
+            in.nextLine();
             
         }
         if(historialVenta.get(indice).getLista().size() >= 10){
@@ -138,8 +142,6 @@ public class VentasTest {
         }
     }
     
-//    crea un array temporal de orden que se añade en un arrayList, al final
-//            el array es limpiado
     
        
         
