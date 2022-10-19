@@ -26,7 +26,7 @@ public class Orden {
     
     
 
-    public Orden( ArrayList <Producto> lista) {
+    public Orden(ArrayList <Producto> lista) {
         this();
         this.lista = lista;
     }
@@ -36,7 +36,7 @@ public class Orden {
             lista.add(producto);
             System.out.println("Producto agregado correctamente");
         }else{
-            System.out.println("No se pudo agregar el producto, demasiados items");
+            System.out.println("No se pudo agregar el producto, límite alcanzado");
         }
         
     }
@@ -44,6 +44,11 @@ public class Orden {
     public int getIdOrden() {
         return idOrden;
     }
+
+    public ArrayList<Producto> getLista() {
+        return lista;
+    }
+
     
     
     
@@ -63,6 +68,31 @@ public class Orden {
         for(int i = 0 ; i < lista.size() ; i ++){
             System.out.println(lista.get(i).toString());
         }
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 59 * hash + this.idOrden;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Orden other = (Orden) obj;
+        if (this.idOrden != other.idOrden) {
+            return false;
+        }
+        return true;
     }
     
     

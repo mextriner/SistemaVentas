@@ -21,9 +21,12 @@ public class VentasTest {
      */
     public static Scanner in = new Scanner(System.in);
     
-    public static ArrayList <Producto> lista = new ArrayList<>();
+    public static ArrayList <Orden> historialVenta = new ArrayList<>();
     
-    public static ArrayList <ArrayList> ordenLista = new ArrayList <ArrayList>();
+//    indice me permite crear nuevos objetos de tipo Orden dentro del ArrayList
+    
+    public static int indice = 0;
+    
     
     
     public static void main(String[] args) {
@@ -41,29 +44,41 @@ public class VentasTest {
             System.out.println("\t1) Hacer una Orden");
             System.out.println("\t2) Mostrar Orden");
             System.out.println("\t3) Mostrar total");
+            System.out.println("\t4) Terminar Orden");
             System.out.println("\t0) Salir");
             opcion = in.nextInt();
             switch(opcion){
                 case 1:
-                    System.out.println("Nueva orden creada:\n");
-                    
-                    otroPro(lista);
+                    System.out.println("Orden Creada");
+                    in.nextLine();
+                    otroPro();
                     break;
                 case 2:
+                    in.nextLine();
                    Orden ord;
-                    mostrarOrdenes(ordenLista);
+                    mostrarOrdenes(historialVenta);
                     System.out.println("Seleccione la orden a mostrar: ");
                     int a = in.nextInt()-1;
                     System.out.println("Pulse intro para continuar.");
                     in.nextLine();
-                    ord = ordenLista.get(a);
+                    ord = historialVenta.get(a);
                     ord.mostrarOrden();
                     
                     
                     break;
                 case 3:
-                    mostrarOrdenes(ordenLista);
+                    in.nextLine();
+                    mostrarOrdenes(historialVenta);
                     break;
+                    
+                case 4:
+                    in.nextLine();
+                    System.out.println("Orden Terminada");
+                    System.out.println("Pulse intro para continuar");
+                    in.nextLine();
+                    indice++;
+                    break;
+                    
                 default:
                     System.out.println("Inserte un número entre el 0 y el 3.");
                     break;
@@ -76,60 +91,66 @@ public class VentasTest {
 //    crea un array temporal de producto que se añade en un array list, al final
 //            el array es limpiado
     
-    public static void adProducto(){
-        Producto proTemp [] = new Producto[1];
+    public static void adProducto(ArrayList <Producto> lista){
+        
+        Producto proTemp;
         System.out.println("Introduzca el nombre del producto:");
         String nom = in.nextLine();
         in.nextLine();
         System.out.println("Introduzca el precio:");
         double pre = in.nextDouble();
         in.nextLine();
-        proTemp[0] = new Producto(nom , pre);
-        lista.add(proTemp[0]);
+//        Instancio el Producto y lo añado al ArrayList de la Orden del indice
+//          correspondiente
+        proTemp = new Producto(nom , pre);
+        lista.add(proTemp);
+        
     }
     
 //    bucle para añadir indefinidos productos al arrayList al final esta se limpia
 //    para ser usada en otra orden
-    public static void otroPro(ArrayList <Producto> lista){
+    
+    
+    public static void otroPro(){
+        ArrayList <Producto> lista = new ArrayList<>();
+         Orden entrada;
+        entrada = new Orden(lista);
+        historialVenta.add(entrada);
         
-        
-        System.out.println("¿Desea introducir otro producto?");
+        System.out.println("¿Desea introducir un producto?");
         System.out.println("y(sí)/n(no)");
-        char a = in.next().charAt(0);
+        char a = in.next().toLowerCase().charAt(0);
+        
         while (a != 'y' && a!='n'){
             System.out.println("introduzca un valor válido (y ó n)");
-            a = in.next().charAt(0);
+            a = in.next().toLowerCase().charAt(0);
         }
+        
         while(a == 'y'){
-            adProducto();
+            adProducto(lista);
             System.out.println("¿Desea introducir otro producto?");
             System.out.println("y(sí)/n(no)");
             a = in.next().charAt(0);
+            
         }
-        adOrden();
+        if(historialVenta.get(indice).getLista().size() >= 10){
+            indice++;
+        }
     }
     
 //    crea un array temporal de orden que se añade en un arrayList, al final
 //            el array es limpiado
     
-    public static void adOrden(){
-        int indice = 0;
-        Orden ord;
-        ArrayList <Producto> listaProductos;
-        listaProductos = lista.clone();
-        ArrayList <Orden> ordTemp = new ArrayList <Orden>();
-        ord = ordTemp.get(indice);
-        ord = new Orden(lista);
-        ordenLista.add(ordTemp);
-        indice ++;
-    }
+       
+        
+    
     
 //    Visualiza el id y el predio total de cada orden
     
-    public static void mostrarOrdenes(ArrayList <Orden> ordenLista){
-        for(int i = 0 ; i < ordenLista.size() ; i++){
-            System.out.println("Orden: "+ordenLista.get(i).getIdOrden()+"\t"
-                    + ordenLista.get(i).calcularTotal()+"€");
+    public static void mostrarOrdenes(ArrayList <Orden> historialVenta){
+        for(int i = 0 ; i < historialVenta.size() ; i++){
+            System.out.println("Orden: "+historialVenta.get(i).getIdOrden()+"\t"
+                    + historialVenta.get(i).calcularTotal()+"€");
         }
     }
     
