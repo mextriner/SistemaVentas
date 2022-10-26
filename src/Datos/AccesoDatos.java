@@ -23,7 +23,9 @@ import java.util.Scanner;
 public class AccesoDatos implements Interfaz{
     
   
-     
+     public AccesoDatos(){
+         
+     }
      
 
     @Override

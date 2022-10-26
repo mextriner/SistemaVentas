@@ -61,13 +61,22 @@ public class Orden {
     }
     
     
-    
     public void mostrarOrden(){
         System.out.println("ID Orden:" + idOrden);
         System.out.println("\n\tProductos: ");
         for(int i = 0 ; i < lista.size() ; i ++){
             System.out.println(lista.get(i).toString());
         }
+    }
+    
+    public String mostrarOrden(int a){
+        String txt = "";
+        System.out.println("ID Orden:" + idOrden);
+        System.out.println("\n\tProductos: ");
+        for(int i = 0 ; i < lista.size() ; i ++){
+            txt = txt.concat(lista.get(i).toString());
+        }
+        return txt;
     }
 
     @Override
